@@ -1,110 +1,148 @@
 
-import { Star } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Button } from "./ui/button";
+import { Card, CardContent, CardFooter } from "./ui/card";
+
+const testimonials = [
+  {
+    id: 1,
+    name: "Мария Иванова",
+    role: "Ученица 11 класса",
+    image: "/placeholder.svg",
+    text: "Благодаря занятиям с Анной я смогла поднять свой уровень знаний по математике и успешно сдать ЕГЭ на 92 балла. Она объясняет очень понятно и всегда находит индивидуальный подход.",
+    rating: 5,
+  },
+  {
+    id: 2,
+    name: "Дмитрий Петров",
+    role: "Студент 1 курса",
+    image: "/placeholder.svg",
+    text: "Обратился за помощью при подготовке к сессии по высшей математике. Анна объяснила все так, что даже самые сложные темы стали понятными. Сдал экзамен на отлично!",
+    rating: 5,
+  },
+  {
+    id: 3,
+    name: "Елена Смирнова",
+    role: "Мама ученика 8 класса",
+    image: "/placeholder.svg",
+    text: "Мой сын всегда испытывал трудности с математикой. После нескольких месяцев занятий с Анной его оценки значительно улучшились, а главное - появился интерес к предмету.",
+    rating: 5,
+  },
+  {
+    id: 4,
+    name: "Александр Козлов",
+    role: "Участник олимпиад",
+    image: "/placeholder.svg",
+    text: "Благодаря Анне я смог подготовиться к олимпиаде по математике и занять призовое место. Её подход к нестандартным задачам и глубокое понимание предмета помогли мне развить математическое мышление.",
+    rating: 5,
+  },
+];
 
 const Testimonials = () => {
-  const testimonials = [
-    {
-      name: "Михаил Соколов",
-      role: "Ученик 11 класса",
-      image: "https://images.unsplash.com/photo-1568602471122-7832951cc4c5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      quote: "Благодаря Елене я сдал ЕГЭ по математике на 92 балла! Она объясняет сложные темы просто и понятно, а её методики запоминания формул действительно работают. За полгода мы прошли всю программу и даже больше.",
-      stars: 5
-    },
-    {
-      name: "Анна Петрова",
-      role: "Мама ученика 9 класса",
-      image: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      quote: "Мой сын всегда испытывал трудности с математикой. После нескольких месяцев занятий с Еленой его оценки значительно улучшились, а самое главное - появился интерес к предмету. Теперь он сам решает задачи!",
-      stars: 5
-    },
-    {
-      name: "Дмитрий Ковалев",
-      role: "Выпускник, студент МФТИ",
-      image: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      quote: "Занимался с Еленой два года перед поступлением в вуз. Подготовка была на высшем уровне - мы разобрали все типы заданий повышенной сложности. В итоге я не только хорошо сдал ЕГЭ, но и победил на региональной олимпиаде.",
-      stars: 5
-    },
-    {
-      name: "Светлана Игнатьева",
-      role: "Мама ученицы 7 класса",
-      image: "https://images.unsplash.com/photo-1601412436009-d964bd02edbc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      quote: "Елена нашла подход к моей дочери, которая категорически не хотела учить математику. Теперь у нас твердая четверка, и я очень благодарна за индивидуальный подход и терпение!",
-      stars: 4
-    },
-    {
-      name: "Алексей Винников",
-      role: "Ученик 10 класса",
-      image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      quote: "Очень доволен занятиями! Елена всегда готова ответить на любые вопросы, объясняет материал доступно и интересно. Рекомендую всем, кто хочет по-настоящему разобраться в математике.",
-      stars: 5
-    },
-    {
-      name: "Екатерина Лосева",
-      role: "Выпускница, студентка МГТУ",
-      image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80",
-      quote: "Елена не просто готовит к сдаче экзаменов, она учит мыслить математически. Этот навык помогает мне сейчас в университете. Занятия всегда проходили в комфортной обстановке, а сложные концепции становились простыми.",
-      stars: 5
-    }
-  ];
+  const [activeIndex, setActiveIndex] = useState(0);
+  const itemsPerView = 3;
+  const maxIndex = Math.max(0, testimonials.length - itemsPerView);
+
+  const goToPrev = () => {
+    setActiveIndex((current) => (current > 0 ? current - 1 : 0));
+  };
+
+  const goToNext = () => {
+    setActiveIndex((current) => (current < maxIndex ? current + 1 : maxIndex));
+  };
+
+  const visibleTestimonials = testimonials.slice(
+    activeIndex,
+    activeIndex + itemsPerView
+  );
 
   return (
-    <section id="testimonials" className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold text-math-dark mb-4">
+    <section id="testimonials" className="py-16 bg-math-light/30">
+      <div className="container mx-auto px-4">
+        <div className="text-center mb-12 max-w-2xl mx-auto">
+          <h2 className="text-3xl font-bold font-playfair mb-4">
             Отзывы <span className="text-math-primary">учеников</span>
           </h2>
-          <div className="w-24 h-1 bg-math-primary mx-auto mb-6"></div>
-          <p className="max-w-3xl mx-auto text-gray-700 text-lg">
-            Мои ученики и их родители делятся впечатлениями о нашей совместной работе и достигнутых результатах.
+          <p className="text-gray-700">
+            Что говорят мои ученики и их родители о наших занятиях
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="overflow-hidden transition-all duration-300 hover:shadow-lg animate-fade-in" style={{animationDelay: `${0.1 * index}s`}}>
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex items-center space-x-4">
-                    <div className="h-14 w-14 rounded-full overflow-hidden">
-                      <img 
-                        src={testimonial.image} 
-                        alt={testimonial.name}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                    <div>
-                      <h4 className="font-medium text-math-dark">{testimonial.name}</h4>
-                      <p className="text-sm text-gray-500">{testimonial.role}</p>
-                    </div>
-                  </div>
-                  <div className="flex text-yellow-400">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className="h-4 w-4" 
-                        fill={i < testimonial.stars ? "currentColor" : "none"}
+
+        <div className="relative">
+          <div className="hidden md:flex justify-between absolute -left-4 -right-4 top-1/2 -translate-y-1/2 z-10 pointer-events-none">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full bg-white shadow-md pointer-events-auto"
+              onClick={goToPrev}
+              disabled={activeIndex === 0}
+            >
+              <ChevronLeft />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="rounded-full bg-white shadow-md pointer-events-auto"
+              onClick={goToNext}
+              disabled={activeIndex >= maxIndex}
+            >
+              <ChevronRight />
+            </Button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {visibleTestimonials.map((testimonial) => (
+              <Card key={testimonial.id} className="h-full transition-all duration-300 hover:shadow-lg">
+                <CardContent className="pt-6">
+                  <div className="flex items-center space-x-1 mb-4">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star
+                        key={i}
+                        size={16}
+                        className={i < testimonial.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-300"}
                       />
                     ))}
                   </div>
-                </div>
-                
-                <blockquote className="text-gray-700 italic">
-                  "{testimonial.quote}"
-                </blockquote>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        
-        <div className="mt-12 text-center animate-fade-in" style={{animationDelay: "0.6s"}}>
-          <a href="#" className="inline-flex items-center text-math-primary hover:text-math-secondary font-medium">
-            Смотреть все отзывы (36+)
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-1" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
-            </svg>
-          </a>
+                  <p className="text-gray-700 mb-6">{testimonial.text}</p>
+                </CardContent>
+                <CardFooter className="border-t pt-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-full overflow-hidden">
+                      <img
+                        src={testimonial.image}
+                        alt={testimonial.name}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div>
+                      <h4 className="font-bold">{testimonial.name}</h4>
+                      <p className="text-sm text-gray-600">{testimonial.role}</p>
+                    </div>
+                  </div>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
+
+          <div className="flex justify-center gap-1 mt-8 md:hidden">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={goToPrev}
+              disabled={activeIndex === 0}
+            >
+              <ChevronLeft size={16} />
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={goToNext}
+              disabled={activeIndex >= maxIndex}
+            >
+              <ChevronRight size={16} />
+            </Button>
+          </div>
         </div>
       </div>
     </section>

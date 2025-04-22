@@ -1,61 +1,58 @@
 
-import { Button } from "@/components/ui/button";
+import { Button } from "./ui/button";
+import { ArrowRight } from "lucide-react";
 
 const Hero = () => {
   return (
-    <section id="home" className="relative overflow-hidden bg-gradient-to-r from-math-light to-white py-20 md:py-24">
-      {/* Декоративные элементы */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-math-primary opacity-10 rounded-full -translate-x-1/3 -translate-y-1/3"></div>
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-math-secondary opacity-10 rounded-full translate-x-1/3 translate-y-1/3"></div>
-      
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-center">
-          <div className="md:w-1/2 md:pr-12 mb-10 md:mb-0 animate-fade-in">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl font-playfair font-bold text-math-dark mb-6">
-              <span className="text-math-primary">Математика</span> стала проще
+    <section className="pt-24 pb-16 md:pt-32 md:pb-24">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col md:flex-row items-center gap-8 md:gap-16">
+          <div className="w-full md:w-1/2 space-y-6 animate-fade-in">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-playfair text-math-dark">
+              Открой мир <span className="text-math-primary">математики</span> с профессионалом
             </h1>
-            <p className="text-xl text-gray-700 mb-8">
-              Индивидуальные занятия и подготовка к экзаменам с опытным преподавателем. Помогу полюбить математику и достичь высоких результатов!
+            <p className="text-lg text-gray-700 max-w-xl">
+              Индивидуальный подход, повышение успеваемости и подготовка к экзаменам. 
+              Превращаю сложные задачи в понятные решения.
             </p>
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button className="bg-math-primary hover:bg-math-secondary text-white px-8 py-6 text-lg">
-                Записаться на пробный урок
+            <div className="flex flex-wrap gap-4">
+              <Button size="lg" className="gap-2">
+                Записаться на пробный урок <ArrowRight size={16} />
               </Button>
-              <Button variant="outline" className="border-math-primary text-math-primary hover:bg-math-light px-8 py-6 text-lg">
-                Узнать больше
+              <Button size="lg" variant="outline">
+                Подробнее об услугах
               </Button>
+            </div>
+            <div className="flex items-center gap-4 pt-4">
+              <div className="flex -space-x-2">
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    className="w-10 h-10 rounded-full border-2 border-white overflow-hidden"
+                  >
+                    <img
+                      src="/placeholder.svg"
+                      alt={`Ученик ${i}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
+              </div>
+              <p className="text-sm text-gray-600">
+                <span className="font-bold text-math-primary">100+</span> довольных учеников
+              </p>
             </div>
           </div>
-          
-          <div className="md:w-1/2 relative animate-fade-in" style={{animationDelay: "0.3s"}}>
-            <div className="relative">
-              {/* Основное фото */}
-              <div className="relative z-10 rounded-lg overflow-hidden shadow-xl transform rotate-2 hover:rotate-0 transition-transform duration-300">
-                <img 
-                  src="https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
-                  alt="Елена - репетитор по математике" 
-                  className="w-full h-auto rounded-lg"
-                />
-              </div>
-              
-              {/* Декоративные формулы */}
-              <div className="absolute -bottom-10 -left-10 z-0 bg-white p-4 rounded-lg shadow-lg transform -rotate-6 hidden md:block">
-                <img 
-                  src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80" 
-                  alt="Математические формулы" 
-                  className="w-full h-auto rounded"
-                />
-              </div>
-              
-              {/* Декоративные числа */}
-              <div className="absolute -top-8 -right-8 z-0 bg-white p-3 rounded-lg shadow-lg transform rotate-12 hidden md:block">
-                <img 
-                  src="https://images.unsplash.com/photo-1596495578065-6e0763fa1178?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=250&q=80" 
-                  alt="Математические числа" 
-                  className="w-full h-auto rounded"
-                />
-              </div>
+          <div className="w-full md:w-1/2 relative animate-fade-in">
+            <div className="aspect-[3/4] max-w-md mx-auto relative z-10 rounded-xl overflow-hidden shadow-xl">
+              <img
+                src="/placeholder.svg"
+                alt="Репетитор по математике"
+                className="w-full h-full object-cover"
+              />
             </div>
+            <div className="absolute -top-5 -right-5 w-32 h-32 bg-math-light rounded-full -z-10"></div>
+            <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-math-primary/20 rounded-full -z-10"></div>
           </div>
         </div>
       </div>
